@@ -56,20 +56,16 @@ class App extends Component {
     }
   }
 
-  createPost(content) {
-    this.setState({ loading: true })
-    this.state.socialNetwork.methods.createPost(content).send({ from: this.state.account })
-    .once('receipt', (receipt) => {
-      this.setState({ loading: false })
-    })
+  async createPost(content) {
+    
+    await this.state.socialNetwork.methods.createPost(content).send({ from: this.state.account })
+    
   }
 
-  tipPost(id, tipAmount) {
-    this.setState({ loading: true })
-    this.state.socialNetwork.methods.tipPost(id).send({ from: this.state.account, value: tipAmount })
-    .once('receipt', (receipt) => {
-      this.setState({ loading: false })
-    })
+  async tipPost(id, tipAmount) {
+    
+    await this.state.socialNetwork.methods.tipPost(id).send({ from: this.state.account, value: tipAmount })
+    
   }
 
   constructor(props) {
@@ -79,7 +75,7 @@ class App extends Component {
       socialNetwork: null,
       postCount: 0,
       posts: [],
-      loading: true
+      loading: false
     }
 
     this.createPost = this.createPost.bind(this)
